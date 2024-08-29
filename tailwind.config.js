@@ -21,6 +21,14 @@ module.exports = {
           success: "#22A094",
           warning: "#F7CB45",
         }
+      },
+      fontFamily: {
+        Nunito: ["Nunito", "sans-serif"],
+        NunitoLight: ["NunitoLight", "sans-serif"],
+        NunitoMedium: ["NunitoMedium", "sans-serif"],
+        NunitoBold: ["NunitoBold", "sans-serif"],
+        NunitoSemiBold: ["NunitoSemiBold", "sans-serif"],
+        NunitoExtraBold: ["NunitoExtraBold", "sans-serif"],
       }
     },
   },

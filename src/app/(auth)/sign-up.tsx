@@ -1,5 +1,6 @@
 import google from '@/assets/icons/google.png';
-import logo from '@/assets/images/top-brand.png';
+import logo from '@/assets/images/icon.png';
+import top from '@/assets/images/top-brand.png';
 import Button from '@/src/lib/ui/components/button';
 import { Input } from '@/src/lib/ui/components/input';
 import { faAt, faIdCard, faLock } from '@fortawesome/free-solid-svg-icons';
@@ -7,18 +8,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { Link } from 'expo-router';
 import { Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-const PersonalInfoForm = () => {
+const SignUpForm = () => {
   return (
     <ScrollView className="flex-1 bg-background-primary">
       <SafeAreaView>
         <View className="flex-1 bg-background-primary">
           <View className="flex relative justify-center items-center w-full h-[150px]">
-            <Image
-              source={logo}
-              className="w-full"
-              resizeMode="contain"
-            ></Image>
-            <View className="absolute bottom-[-13px] left-5">
+            <Image source={top} className="w-full" resizeMode="contain"></Image>
+            <View className="absolute bottom-[-5px] left-5">
+              <Image
+                source={logo}
+                className="w-[60px] h-[60px] mb-3"
+                resizeMode="contain"
+              ></Image>
               <Text className="text-3xl font-semibold text-foreground-secondary">
                 Hello, welcome to Helsa
               </Text>
@@ -27,7 +29,7 @@ const PersonalInfoForm = () => {
               </Text>
             </View>
           </View>
-          <View className="px-5 py-5">
+          <View className="px-5 py-5 mt-4">
             <Input
               label="First name"
               labelStyle="text-sm"
@@ -83,4 +85,4 @@ const PersonalInfoForm = () => {
   );
 };
 
-export default PersonalInfoForm;
+export default SignUpForm;
