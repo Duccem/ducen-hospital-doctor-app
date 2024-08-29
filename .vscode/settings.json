@@ -23,5 +23,9 @@
     "**/node_modules": true,
     "**/dist": true,
     "**/.expo": true,
-  }
+  },
+  "cSpell.words": [
+    "swiper",
+    "Swiper"
+  ]
 }

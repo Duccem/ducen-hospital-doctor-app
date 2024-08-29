@@ -8,9 +8,9 @@
     "scheme": "ducen-hospital-doctor-app",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/splash1.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#8167EC"
     },
     "ios": {
       "supportsTablet": true
