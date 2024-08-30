@@ -1,15 +1,27 @@
+import {
+  ApolloClient,
+  ApolloProvider,
+  HttpLink,
+  InMemoryCache,
+} from '@apollo/client';
 import { ClerkLoaded, ClerkProvider } from '@clerk/clerk-expo';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { LogBox } from 'react-native';
-import 'react-native-reanimated';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { AnimationScreen } from '../components/animation-screen';
 import { tokenCache } from '../modules/auth/infrastructure/ClerkToken';
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
-
+const baseUrl = process.env.EXPO_PUBLIC_SERVER_BASE_URL!;
+const client = new ApolloClient({
+  uri: `${baseUrl}/api/graphql`,
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: `${baseUrl}/api/graphql`,
+  }),
+});
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 LogBox.ignoreLogs(['Clerk:']);
 SplashScreen.preventAutoHideAsync();
@@ -55,17 +67,19 @@ export default function RootLayout() {
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <ClerkLoaded>
-        <Animated.View style={{ flex: 1 }} entering={FadeIn}>
-          <Stack>
-            <Stack.Screen
-              name="index"
-              options={{ headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen name="(root)" options={{ headerShown: false }} />
-            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-        </Animated.View>
+        <ApolloProvider client={client}>
+          <Animated.View style={{ flex: 1 }} entering={FadeIn}>
+            <Stack>
+              <Stack.Screen
+                name="index"
+                options={{ headerShown: false }}
+              ></Stack.Screen>
+              <Stack.Screen name="(root)" options={{ headerShown: false }} />
+              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+          </Animated.View>
+        </ApolloProvider>
       </ClerkLoaded>
     </ClerkProvider>
   );

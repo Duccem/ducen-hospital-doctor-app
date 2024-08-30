@@ -19,6 +19,7 @@ interface InputFieldProps extends TextInputProps {
   inputStyle?: string;
   iconStyle?: string;
   className?: string;
+  error?: string | null;
 }
 
 export const Input = ({
@@ -30,14 +31,16 @@ export const Input = ({
   inputStyle,
   iconStyle,
   className,
+  error,
   ...props
 }: InputFieldProps) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      className="w-full"
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View className="my-2 w-full">
+        <View className="my-2">
           {label && (
             <Text
               className={cn('text-lg font-JakartaSemiBold mb-3', labelStyle)}
@@ -70,6 +73,11 @@ export const Input = ({
               secureTextEntry={secureTextEntry}
               {...props}
             />
+            {error && (
+              <Text className="text-xs text-foreground-primary absolute bottom-[-17px] right-0 mr-2">
+                {error}
+              </Text>
+            )}
           </View>
         </View>
       </TouchableWithoutFeedback>

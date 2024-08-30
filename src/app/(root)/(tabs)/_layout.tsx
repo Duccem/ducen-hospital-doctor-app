@@ -1,4 +1,11 @@
 import { Tabs } from 'expo-router';
+import {
+  LucideCalendar,
+  LucideLayoutDashboard,
+  LucidePieChart,
+  LucideStethoscope,
+  LucideUserCircle2,
+} from 'lucide-react-native';
 import React from 'react';
 import { Image, View } from 'react-native';
 
@@ -28,17 +35,16 @@ const Layout = () => {
     <Tabs
       initialRouteName="home"
       screenOptions={{
-        tabBarActiveTintColor: 'white',
+        tabBarActiveTintColor: '#dfcbfa',
         tabBarInactiveTintColor: 'white',
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: '#0CC25F',
-          borderRadius: 50,
+          backgroundColor: '#0E0E0E',
+          borderRadius: 20,
           paddingBottom: 0,
-          overflow: 'hidden',
           marginHorizontal: 20,
           marginBottom: 20,
-          height: 50,
+          height: 70,
           display: 'flex',
           justifyContent: 'space-around',
           alignItems: 'center',
@@ -48,32 +54,48 @@ const Layout = () => {
       }}
     >
       <Tabs.Screen
+        name="patients"
+        options={{
+          title: 'Patients',
+          headerShown: false,
+          tabBarIcon: ({ focused, color }) => (
+            <LucideStethoscope
+              size={25}
+              color={focused ? '#8167EC' : 'white'}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="schedule"
+        options={{
+          title: 'Schedule',
+          headerShown: false,
+          tabBarIcon: ({ focused, color }) => (
+            <LucideCalendar size={25} color={focused ? '#8167EC' : 'white'} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="home"
         options={{
           title: 'Home',
           headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} source={''} />
+          tabBarIcon: ({ focused, color }) => (
+            <LucideLayoutDashboard
+              size={25}
+              color={focused ? '#8167EC' : 'white'}
+            />
           ),
         }}
       />
       <Tabs.Screen
-        name="chat"
+        name="wallet"
         options={{
-          title: 'Chat',
+          title: 'Wallet',
           headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} source={''} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="rides"
-        options={{
-          title: 'Rides',
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} source={''} />
+          tabBarIcon: ({ focused, color }) => (
+            <LucidePieChart size={25} color={focused ? '#8167EC' : 'white'} />
           ),
         }}
       />
@@ -82,8 +104,11 @@ const Layout = () => {
         options={{
           title: 'Profile',
           headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} source={''} />
+          tabBarIcon: ({ focused, color }) => (
+            <LucideUserCircle2
+              size={25}
+              color={focused ? '#8167EC' : 'white'}
+            />
           ),
         }}
       />

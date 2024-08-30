@@ -6,14 +6,14 @@ module.exports = {
       colors: {
         brand: {
           primary: "#8167EC",
-          secondary: "#dfcbfa",
+          secondary: "#ddd6fe",
         },
         background: {
           primary: "#FFFFFF",
           secondary: "#E1E7Ef",
         },
         foreground: {
-          primary: "#0E0F13",
+          primary: "#0E0E0E",
           secondary: "#22242e",
         },
         complementary: {
