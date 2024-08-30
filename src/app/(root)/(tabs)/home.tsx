@@ -1,5 +1,6 @@
 import { faChevronDown, faSun } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import LottieView from 'lottie-react-native';
 import { Pill, Stethoscope, Syringe } from 'lucide-react-native';
 import { ScrollView, Text, View } from 'react-native';
 import { BarChart, PieChart } from 'react-native-gifted-charts';
@@ -226,9 +227,21 @@ const Home = () => {
             Thur 29 Agu
           </Text>
         </View>
-        <Text className="text-2xl text-foreground-primary font-NunitoExtraBold">
-          Good Morning, Dr Jose.
-        </Text>
+        <View className="flex flex-row items-center">
+          <Text className="text-2xl text-foreground-primary font-NunitoExtraBold">
+            Good Morning, Dr Jose.
+          </Text>
+          <LottieView
+            style={{
+              width: 50,
+              height: 50,
+            }}
+            speed={2}
+            source={require('../../../../assets/animations/bot_greeting.json')}
+            autoPlay
+            loop
+          />
+        </View>
         <View className="py-4 px-5 bg-gray-100 rounded-xl mt-3 flex flex-row">
           <View className="w-1/4 mr-2 flex justify-center items-center">
             <View className="bg-brand-primary rounded-lg w-[70px] h-[70px] flex justify-center items-center">
