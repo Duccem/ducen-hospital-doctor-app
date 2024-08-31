@@ -37,7 +37,7 @@ const WelcomePage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const isLastSlide = activeIndex === onboarding.length - 1;
   return (
-    <SafeAreaView className="flex h-full items-center justify-center bg-background-primary py-5">
+    <SafeAreaView className="flex h-full items-center justify-center bg-background-third py-5">
       <TouchableOpacity
         className="w-full flex justify-end items-end p-5"
         onPress={() => {

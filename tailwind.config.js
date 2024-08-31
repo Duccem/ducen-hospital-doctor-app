@@ -7,10 +7,12 @@ module.exports = {
         brand: {
           primary: "#8167EC",
           secondary: "#ddd6fe",
+          third: "#f5f6fa"
         },
         background: {
           primary: "#FFFFFF",
           secondary: "#E1E7Ef",
+          third: "#F5F6FA",
         },
         foreground: {
           primary: "#0E0E0E",

@@ -42,22 +42,20 @@ export const Input = ({
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View className="my-2">
           {label && (
-            <Text
-              className={cn('text-lg font-JakartaSemiBold mb-3', labelStyle)}
-            >
+            <Text className={cn('text-lg font-NunitoBold mb-3', labelStyle)}>
               {label}
             </Text>
           )}
           <View
             className={cn(
-              'flex flex-row justify-start items-center relative bg-background-primary rounded-lg border border-brand-primary',
+              'flex flex-row justify-start items-center relative bg-background-primary rounded-xl h-14 shadow-lg shadow-slate-400',
               containerStyle,
             )}
           >
             {Icon && (
               <View
                 className={cn(
-                  'w-6 h-6 justify-center items-center p-2 ml-2',
+                  'w-6 h-6 justify-center items-center p-2 ml-4',
                   iconStyle,
                 )}
               >
@@ -66,7 +64,7 @@ export const Input = ({
             )}
             <TextInput
               className={cn(
-                'rounded-full p-2 font-JakartaSemiBold text-[15px] flex-1',
+                'rounded-full p-2 pl-4 font-NunitoSemiBold text-[15px] flex-1',
                 inputStyle,
               )}
               cursorColor={'#000'}

@@ -1,18 +1,18 @@
-import google from '@/assets/icons/google.png';
-import logo from '@/assets/images/icon.png';
-import top from '@/assets/images/top-brand.png';
+//import top from '@/assets/images/icon.png';
+import { Oauth } from '@/src/components/oauth';
 import Button from '@/src/lib/ui/components/button';
 import { Input } from '@/src/lib/ui/components/input';
 import { useCreateUserMutation } from '@/src/modules/auth/infrastructure/apollo/createUser';
 import { useSignUp } from '@clerk/clerk-expo';
-import { faAt, faIdCard, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, router } from 'expo-router';
 import LottieView from 'lottie-react-native';
+import { Activity, AtSign, Lock, UserRound } from 'lucide-react-native';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Alert, Image, ScrollView, Text, View } from 'react-native';
+import { Alert, Dimensions, ScrollView, Text, View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import uuid from 'react-native-uuid';
@@ -48,6 +48,7 @@ const SignUpForm = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const { createUser } = useCreateUserMutation();
   const { isLoaded, signUp, setActive } = useSignUp();
+
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     if (!isLoaded) return;
 
@@ -101,27 +102,24 @@ const SignUpForm = () => {
       });
     }
   };
+
   return (
-    <ScrollView className="flex-1 bg-background-primary">
-      <SafeAreaView>
-        <View className="flex-1 bg-background-primary">
-          <View className="flex relative justify-center items-center w-full h-[150px]">
-            <Image source={top} className="w-full" resizeMode="contain"></Image>
-            <View className="absolute bottom-[-5px] left-5">
-              <Image
-                source={logo}
-                className="w-[60px] h-[60px] mb-3"
-                resizeMode="contain"
-              ></Image>
-              <Text className="text-3xl font-semibold text-foreground-secondary">
-                Hello, welcome to Helsa
-              </Text>
-              <Text className="text-xl font-normal text-foreground-secondary">
-                Let's get started
-              </Text>
-            </View>
-          </View>
-          <View className="px-5 py-5 mt-4">
+    <ScrollView
+      className="bg-brand-primary flex-1 h-screen"
+      style={{ height: Dimensions.get('screen').height }}
+    >
+      <SafeAreaView
+        className="bg-brand-primary relative h-screen"
+        style={{ height: Dimensions.get('screen').height }}
+      >
+        <View className="flex flex-row justify-center items-center absolute top-[60px] w-full">
+          <Activity className="text-white mr-3" size={30} />
+          <Text className="text-background-primary font-NunitoBold text-2xl">
+            Ducen
+          </Text>
+        </View>
+        <View className="h-full bg-background-third rounded-t-[40px] mt-[90px]">
+          <View className="px-5 py-6 mt-">
             <Controller
               name="firstName"
               rules={{ required: true }}
@@ -129,8 +127,8 @@ const SignUpForm = () => {
               render={({ field: { onChange, value, onBlur } }) => (
                 <Input
                   label="First name"
-                  labelStyle="text-sm"
-                  Icon={() => <FontAwesomeIcon icon={faIdCard} />}
+                  labelStyle="text-lg"
+                  Icon={() => <UserRound className="w-4 h-4 text-black" />}
                   value={value}
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -145,8 +143,8 @@ const SignUpForm = () => {
               render={({ field: { onChange, value, onBlur } }) => (
                 <Input
                   label="Last name"
-                  labelStyle="text-sm"
-                  Icon={() => <FontAwesomeIcon icon={faIdCard} />}
+                  labelStyle="text-lg"
+                  Icon={() => <UserRound className="w-4 h-4 text-black" />}
                   value={value}
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -161,8 +159,8 @@ const SignUpForm = () => {
               render={({ field: { onChange, value, onBlur } }) => (
                 <Input
                   label="Email"
-                  labelStyle="text-sm"
-                  Icon={() => <FontAwesomeIcon icon={faAt} />}
+                  labelStyle="text-lg"
+                  Icon={() => <AtSign className="w-4 h-4 text-black" />}
                   value={value}
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -177,9 +175,9 @@ const SignUpForm = () => {
               render={({ field: { onChange, value, onBlur } }) => (
                 <Input
                   label="Password"
-                  labelStyle="text-sm"
+                  labelStyle="text-lg"
                   secureTextEntry={true}
-                  Icon={() => <FontAwesomeIcon icon={faLock} />}
+                  Icon={() => <Lock className="w-2 h-2 text-black" />}
                   value={value}
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -190,33 +188,27 @@ const SignUpForm = () => {
             <Button
               title="Sign Up"
               className="mt-4"
+              titleStyle="text-lg"
+              size={'lg'}
               onPress={handleSubmit(onSubmit, console.log)}
             />
-            <View className="flex flex-row justify-center items-center mt-4 gap-x-3">
+            <View className="flex flex-row justify-center items-center my-1 gap-x-3">
               <View className="flex-1 h-[1px] bg-foreground-primary" />
               <Text className="text-lg">Or</Text>
               <View className="flex-1 h-[1px] bg-foreground-primary" />
             </View>
-            <Button
-              title="Log In with Google"
-              variant={'outline'}
-              className=""
-              Left={() => (
-                <Image
-                  source={google}
-                  className="w-5 h-5 mx-6"
-                  resizeMode="contain"
-                />
-              )}
-            />
+            <Oauth title="Sign Up with Google" />
             <Link
               href={'/(auth)/sign-in'}
-              className="text-lg text-center text-foreground-secondary mt-10"
+              className="text-lg text-center text-foreground-secondary mt-5"
             >
-              <Text className="text-foreground-secondary">
+              <Text className="text-foreground-secondary font-NunitoMedium">
                 Already have an account?
               </Text>
-              <Text className="text-brand-primary"> Log In</Text>
+              <Text className="text-brand-primary font-NunitoMedium">
+                {' '}
+                Log In
+              </Text>
             </Link>
           </View>
           <ReactNativeModal

@@ -6,7 +6,9 @@ import {
 } from '@apollo/client';
 import { ClerkLoaded, ClerkProvider } from '@clerk/clerk-expo';
 import { useFonts } from 'expo-font';
+import * as NavigationBar from 'expo-navigation-bar';
 import { SplashScreen, Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { LogBox } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
@@ -25,6 +27,7 @@ const client = new ApolloClient({
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 LogBox.ignoreLogs(['Clerk:']);
 SplashScreen.preventAutoHideAsync();
+NavigationBar.setVisibilityAsync('hidden');
 
 export default function RootLayout() {
   const [appReady, setAppReady] = useState(false);
@@ -41,6 +44,7 @@ export default function RootLayout() {
   useEffect(() => {
     if (loaded || error) {
       SplashScreen.hideAsync();
+
       setAppReady(true);
     }
   }, [loaded]);
@@ -78,6 +82,7 @@ export default function RootLayout() {
               <Stack.Screen name="(auth)" options={{ headerShown: false }} />
               <Stack.Screen name="+not-found" />
             </Stack>
+            <StatusBar backgroundColor="transparent" />
           </Animated.View>
         </ApolloProvider>
       </ClerkLoaded>
