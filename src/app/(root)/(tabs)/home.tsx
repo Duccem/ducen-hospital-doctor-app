@@ -1,16 +1,15 @@
 import { useUser } from '@clerk/clerk-expo';
-import {
-  faChevronDown,
-  faSun
-} from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faSun } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { Activity, Pill, Stethoscope, Syringe } from 'lucide-react-native';
+import { router } from 'expo-router';
+import { Activity } from 'lucide-react-native';
 import {
   Dimensions,
   Image,
   ScrollView,
   Text,
-  View
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { BarChart, LineChart, PieChart } from 'react-native-gifted-charts';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -35,12 +34,6 @@ const colors = [
   'bg-yellow-200',
   'bg-red-200',
   'bg-background-primary',
-];
-
-const icons = [
-  <Pill color={'#0E0E0E'} size={20} />,
-  <Stethoscope color={'#0E0E0E'} size={20} />,
-  <Syringe color={'#0E0E0E'} size={20} />,
 ];
 
 const chartData = [
@@ -177,7 +170,7 @@ const renderDot = (color: string) => {
 
 const FirstChart = () => {
   return (
-    <View className="flex flex-col relative justify-start items-center p-3 rounded-3xl mt-10  bg-background-primary overflow-hidden shadow-lg shadow-lg shadow-slate-400">
+    <View className="flex flex-col relative justify-start items-center p-3 rounded-3xl mt-10  bg-background-primary overflow-hidden shadow-lg  shadow-slate-400">
       <Text className="text-xl w-full font-NunitoBold">Appointment types:</Text>
       <View className="w-full flex flex-row justify-between items-center mt-3">
         <PieChart
@@ -305,7 +298,7 @@ const ThirdChart = () => {
           hideYAxisText={true}
           showXAxisIndices
           color={'#8167EC'}
-          dataPointsColor='#8167EC'
+          dataPointsColor="#8167EC"
         />
       </View>
       <View></View>
@@ -370,10 +363,17 @@ const Home = () => {
           <Text className="text-2xl text-foreground-primary font-NunitoExtraBold">
             Good Morning, Dr Jose.
           </Text>
-          <Image
-            source={{ uri: user?.imageUrl }}
-            className="w-10 h-10 rounded-xl"
-          />
+          <TouchableOpacity
+            className="bg-brand-primary rounded-xl"
+            onPress={() => {
+              router.push('/(root)/profile');
+            }}
+          >
+            <Image
+              source={{ uri: user?.imageUrl }}
+              className="w-10 h-10 rounded-xl"
+            />
+          </TouchableOpacity>
         </View>
         <View className="py-4 px-5 bg-white rounded-xl mt-3 flex flex-row shadow-lg shadow-slate-400">
           <View className="w-1/4 mr-2 flex justify-center items-center">

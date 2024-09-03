@@ -17,6 +17,7 @@ module.exports = {
         foreground: {
           primary: "#0E0E0E",
           secondary: "#22242e",
+          third: "#4A4A4A",
         },
         complementary: {
           danger: "#EA3A3D",

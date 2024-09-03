@@ -1,34 +1,12 @@
 import { Tabs } from 'expo-router';
 import {
+  CircleDollarSign,
   LucideCalendar,
   LucideLayoutDashboard,
   LucidePieChart,
   LucideStethoscope,
-  LucideUserCircle2,
 } from 'lucide-react-native';
 import React from 'react';
-import { Image, View } from 'react-native';
-
-const TabIcon = ({ focused, source }: any) => (
-  <View
-    className={`flex flex-row justify-center items-center rounded-full ${
-      focused ? 'bg-gray-800' : ''
-    }`}
-  >
-    <View
-      className={`rounded-full w-8 h-8 items-center justify-center ${
-        focused ? 'bg-black' : ''
-      }`}
-    >
-      <Image
-        source={source}
-        tintColor={'white'}
-        resizeMode="contain"
-        className="w-5 h-5"
-      />
-    </View>
-  </View>
-);
 
 const Layout = () => {
   return (
@@ -50,6 +28,7 @@ const Layout = () => {
           alignItems: 'center',
           flexDirection: 'row',
           position: 'absolute',
+          borderTopColor: 'transparent',
         },
       }}
     >
@@ -100,15 +79,12 @@ const Layout = () => {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="billing"
         options={{
-          title: 'Profile',
+          title: 'Billing',
           headerShown: false,
           tabBarIcon: ({ focused, color }) => (
-            <LucideUserCircle2
-              size={25}
-              color={focused ? '#8167EC' : 'white'}
-            />
+            <CircleDollarSign size={25} color={focused ? '#8167EC' : 'white'} />
           ),
         }}
       />
